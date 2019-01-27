@@ -27,7 +27,7 @@ class Model :
         db = mysql.connector.connect(
             host="localhost",  # your host, usually localhost
             user="root",  # your username
-            password="R1327526",  # your password
+            password="",  # your password
             database="accidents"  # name of the data base
         )
 
@@ -38,12 +38,19 @@ class Model :
         cur.execute("SELECT * FROM accident")
 
         # Put it all to a data frame
-        sql_data = pd.DataFrame(cur.fetchall())
-        sql_data.columns = cur.column_names
+        df = pd.DataFrame(cur.fetchall())
+        df.columns = cur.column_names
 
         # Close the session
         db.close()
 
         # Show the data
-        return (sql_data.head())
+        df.head()
+        decision = tree.DecisionTreeClassifier(criterion="gini")
+        X = df.values[:, 0:13]
+        Y = df.values[:, 13]
+        trainX, testX, trainY, testY = train_test_split(X, Y, test_size=0.5)
+        decision = decision.fit(trainX, trainY)
+        decision.predict([[1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]])
+        return (decision.score(testX, testY))
 
