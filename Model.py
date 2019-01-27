@@ -22,12 +22,12 @@ class Model :
           decision.predict([[1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]])
           return (decision.score(testX, testY))
 
-    def mysqlResult(self):
+    def mysqlResult(self,day_of_week):
         # Setup MySQL connection
         db = mysql.connector.connect(
             host="localhost",  # your host, usually localhost
             user="root",  # your username
-            password="",  # your password
+            password="R1327526",  # your password
             database="accidents"  # name of the data base
         )
 
@@ -35,7 +35,7 @@ class Model :
         cur = db.cursor()
 
         # Use all the SQL you like
-        cur.execute("SELECT * FROM accident")
+        cur.execute("SELECT * FROM accident WHERE DSDivision = 6")
 
         # Put it all to a data frame
         df = pd.DataFrame(cur.fetchall())
