@@ -47,25 +47,10 @@ def result():
          gender = "Female"
 
       if day_of_week is not "Select":
-         # df = pd.read_csv("acdents.csv")
-         # df.columns = ["X1", "X2", "X3", "X4","X5","X6","X7","X8","X9","X10","X11","X12","X13", "Y"]
-         # df.head()
-         # decision = tree.DecisionTreeClassifier(criterion="gini")
-         # X = df.values[:, 0:13]
-         # Y = df.values[:, 13]
-         # trainX, testX, trainY, testY = train_test_split(X, Y, test_size=0.5)
-         # decision = decision.fit(trainX, trainY)
-         # decision.predict([[1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]])
-      # print("Accuracy: \n", decision.score(testX, testY))
-      #    return redirect(url_for('success', name=decision.score(testX,testY)))
          model = Model()
          x = model.dayOfweek()
-         return redirect(url_for('success', name = x))
+         return redirect(url_for('success', name = day_of_week + " " + weather + light_condition + " " + road_surface_condition + " " + validity_of_license + " " + vehicle_pre_crashfactors + " " + alchohol + " " + ds_division + " " + Work_day_holiday + " " + driver_age + " " + gender))
 
-      if weather is not "Select":
-         model = Model()
-         x = model.dayOfweek()
-         return redirect(url_for('success', name=x))
 
 @app.route('/success/<name>')
 def success(name):
