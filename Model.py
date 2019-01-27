@@ -46,7 +46,7 @@ class Model :
         cur = db.cursor()
 
         # Use all the SQL you like
-        cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + " and Weather =" + weathers[weather] + " and LightCondition = " + light_conditions[light_condition] + " and RoadSurface = 2")
+        cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + " and Weather =" + weathers[weather] + " and LightCondition = " + light_conditions[light_condition] + " and RoadSurface = " + road_surface_[road_surface_condition])
         # cur.execute("SELECT * FROM accidents.accident WHERE DSDivision = 5 and Weather = 2 and LightCondition = 2 and RoadSurface = 1")
 
         # Put it all to a data frame
