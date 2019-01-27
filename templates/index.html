@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        <script>
+            var autocomplete;
+            function initialize() {
+              autocomplete = new google.maps.places.Autocomplete(
+                  /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+                  { types: ['geocode'] });
+              google.maps.event.addListener(autocomplete, 'place_changed', function() {
+              });
+            }
+        </script>
+
+	<style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    <style>
+        .column {
+    <!--float: left;-->
+    width: 50%;
+}
+    </style>
+</head>
+<body align="center" onload="initialize()">
+
+	<!--<h1 class="text-center" class="font-weight-bold">Road Accdents Reserch</h1>-->
+
+    <form action="/result" method="post">
+
+    <div class="row">
+          <div class="col-sm-3">
+
+              <div class="form-group">
+                  <label for="day_of_week">Day of Week</label>
+                  <select class="form-control" id="day_of_week" name="day_of_week">
+                      <option>Select</option>
+                      <option>Sunday</option>
+                      <option>Monday</option>
+                      <option>Tuesday</option>
+                      <option>Wednesday</option>
+                      <option>Thursday</option>
+                      <option>Friday</option>
+                      <option>Saturday</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="weather">Weather</label>
+                  <select class="form-control" id="weather" name="weather">
+                      <option>Select</option>
+                      <option>Clear</option>
+                      <option>Cloudy</option>
+                      <option>Rainy</option>
+                      <option>Fogg/Mist</option>
+                      <option>Other</option>
+                      <option>Not Known</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="light_condition">Light Condition</label>
+                  <select class="form-control" id="light_condition" name="light_condition">
+                      <option>Select</option>
+                      <option>DayLight</option>
+                      <option>Night, No Street lamps</option>
+                      <option>Dusk</option>
+                      <option>Dawn</option>
+                      <option>Night, Improper street lightning</option>
+                      <option>Night, Good street lighting</option>
+                      <option>Not Known</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="road_surface_condition">Road surface condition</label>
+                  <select class="form-control" id="road_surface_condition" name="road_surface_condition">
+                      <option>Select</option>
+                      <option>Dry</option>
+                      <option>Wet</option>
+                      <option>Flooded with water</option
+                      <option>Slippery Surface</option>
+                      <option>Other</option>
+                      <option>Not Known</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="validity_of_license">Validity of license</label>
+                  <select class="form-control" id="validity_of_license" name="validity_of_license">
+                      <option>Select</option>
+                      <option>International license</option>
+                      <option>Probation license</option>
+                      <option>Learner Permit</option>
+                      <option>No valid license for vehicle</option>
+                      <option>Valied license</option>
+                      <option>Not Known</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="vehicle_pre_crashfactors">Vehicle pre crashfactors</label>
+                  <select class="form-control" id="vehicle_pre_crashfactors" name="vehicle_pre_crashfactors">
+                      <option>Select</option>
+                      <option>Other</option>
+                      <option>Not Known</option>
+                      <option>Over loaded or wrongly loaded vehicle</option>
+                      <option>Poor mechanical condition</option>
+                      <option>Lights, Lamps</option>
+                      <option>Steering</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="alchohol">Alchohol Test</label>
+                  <select class="form-control" name="alchohol" id="alchohol">
+                      <option>Select</option>
+                      <option>Over leagal limit</option>
+                      <option>No Alchohol</option>
+                  </select>
+              </div>
+
+          </div>
+
+
+          <div class="col-sm-3">
+
+
+              	<div class="form-group">
+                    <label for="ds_division">DS Division</label>
+                    <select class="form-control" id="ds_division" name="ds_division">
+                        <option>Select</option>
+                        <option>Ampara</option>
+                        <option>Anuradhapura</option>
+                        <option>Badulla</option>
+                        <option>Bandarawela</option>
+                        <option>Batticalo</option>
+                        <option>Chilaw</option>
+                        <option>Colombo</option>
+                        <option>Elpitiya</option>
+                        <option>Galle</option>
+                        <option>Gampaha</option>
+                        <option>Gampola</option>
+                        <option>Jaffna</option>
+                        <option>Kalutara</option>
+                        <option>Kandy</option>
+                        <option>Kantale</option>
+                        <option>Kegalle</option>
+                        <option>Kelaniya</option>
+                        <option>Kuliyapitiya</option>
+                        <option>Kurunegala</option>
+                        <option>Matale</option>
+                        <option>Matara</option>
+                        <option>Monaragala</option>
+                        <option>Mt. Lainia</option>
+                        <option>Negambo</option>
+                        <option>Nekaweratiya</option>
+                        <option>Nugegoda</option>
+                        <option>Nuara Eliya</option>
+                        <option>Panadura</option>
+                        <option>Polonnaruwa</option>
+                        <option>Ratnapura</option>
+                        <option>tangalle</option>
+                        <option>Trincomalee</option>
+                        <option>Vavuniya</option>
+                        <option>Hatton</option>
+                        <option>Manner</option>
+                        <option>Mankulam</option>
+                        <option>Seethawaka</option>
+                        <option>Kilinochchi</option>
+                        <option>Kankasanthurai</option>
+                        <option>Mullativ</option>
+                        <option>Puttalam</option>
+                    </select>
+                </div>
+
+
+              <div class="form-group">
+                  <label for="Work_day_holiday">Work day/ Holiday</label>
+                  <select class="form-control" id="Work_day_holiday" name="Work_day_holiday">
+                      <option>Select</option>
+                      <option>Work Day</option>
+                      <option>Holiday</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="driver_age">Driver Age</label>
+                  <select class="form-control" id="driver_age" name="driver_age">
+                      <option>Select</option>
+                      <option>Below 15</option>
+                      <option>15 - 20</option>
+                      <option>20 - 25</option>
+                      <option>25 - 30</option>
+                      <option>30 - 35</option>
+                      <option>35 - 40</option>
+                      <option>40 - 45</option>
+                      <option>45 - 50</option>
+                      <option>Above 50</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="gender">Gender</label></br>
+                  <input type="radio" id="gender" name="gender" value="Male" checked="checked">Male
+                  <input type="radio"  name="gender" value="Female">Female
+
+              </div>
+
+          </div>
+
+
+          <div class="col-sm-6">
+              <label for="result">Result</label>
+              <br/>
+                <h1 id="result">Posibility : {{ name }} %</h1>
+          </div>
+    </div>
+        <input type="submit" value="Submit">
+
+    </form>
+
+
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+	// Initialize and add the map
+	function initMap() {
+	  // The location of Uluru
+	  var uluru = {lat: 6.939576, lng: 80.039676};
+	  // The map, centered at Uluru
+	  var map = new google.maps.Map(
+	      document.getElementById('map'), {zoom: 8, center: uluru});
+	  // The marker, positioned at Uluru
+	  var marker = new google.maps.Marker({position: uluru, map: map});
+	}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=APIKEY=initMap">
+    </script>
+
+</div>
+</body>
+</html>
