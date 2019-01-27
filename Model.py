@@ -22,7 +22,7 @@ class Model :
           decision.predict([[1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]])
           return (decision.score(testX, testY))
 
-    def mysqlResult(self,day_of_week):
+    def mysqlResult(self, day_of_week, weather, light_condition, road_surface_condition, validity_of_license, vehicle_pre_crashfactors, alchohol, ds_division, Work_day_holiday, driver_age, gender):
         # Setup MySQL connection
         db = mysql.connector.connect(
             host="localhost",  # your host, usually localhost
