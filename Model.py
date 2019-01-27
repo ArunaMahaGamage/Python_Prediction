@@ -24,6 +24,20 @@ class Model :
 
     def mysqlResult(self, day_of_week, weather, light_condition, road_surface_condition, validity_of_license, vehicle_pre_crashfactors, alchohol, ds_division, Work_day_holiday, driver_age, gender):
         day_of_weeks = {"Sunday": "1", "Monday": "2", "Tuesday": "3", "Wednesday": "4", "Thursday": "5" , "Friday": "6" , "Saturday": "7"}
+        weathers = {"Clear": "1", "Cloudy": "2", "Rainy": "3", "Fogg/Mist": "4", "Other": "9" , "Not Known": "0"}
+        light_conditions = {"DayLight": "1", "Night, No Street lamps": "2", "Dusk,Dawn": "3", "Night, Improper street lightning": "4", "Night, Good street lighting": "5" , "Not Known": "0"}
+        road_surface_= {"Dry": "1", "Wet": "2", "Flooded with water": "3", "Slippery Surface": "4", "Other": "9" , "Not Known": "0"}
+        validity_license_= {"International license": "5", "Probation license": "4", "Learner Permit": "3", "No valid license for vehicle": "2", "Valied license": "1" , "Not Known": "0"}
+        vehicle_pre_crashfactor= {"Other,Not Known": "9", "Over loaded or wrongly loaded vehicle": "6", "Poor mechanical condition": "5", "Lights, Lamps": "4" , "Steering": "3", "Tyres": "2", "Brakes": "1"}
+        alchohol_test_= {"Not tested": "3", "Over leagal limit": "2", "No Alchohol": "1"}
+        ds_divisions_= {"Ampara": "1", "Anuradhapura": "2", "Badulla": "3", "Slippery Surface": "4", "Other": "9", "Not Known": "0",  "Not Known": "0"}
+        Work_day_holidays = {"Work Day": "1", "Holiday": "2"}
+        Driver_gender_= {"Male": "1", "Female": "2"}
+
+
+
+
+
         # Setup MySQL connection
         db = mysql.connector.connect(
             host="localhost",  # your host, usually localhost
@@ -36,7 +50,8 @@ class Model :
         cur = db.cursor()
 
         # Use all the SQL you like
-        cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week])
+        # cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + "AND Weather = 1")
+        cur.execute("SELECT * FROM accidents.accident WHERE DSDivision = 6 and Weather = 2")
 
         # Put it all to a data frame
         df = pd.DataFrame(cur.fetchall())
