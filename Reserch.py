@@ -47,16 +47,19 @@ def result():
          gender = "Female"
 
       if day_of_week is not "Select":
-         model = Model()
-         # x = model.dayOfweek()
-         x = model.mysqlResult(day_of_week, weather, light_condition, road_surface_condition, validity_of_license, vehicle_pre_crashfactors, alchohol, ds_division, Work_day_holiday, driver_age, gender)
-         # return redirect(url_for('success', name = day_of_week + " " + weather + light_condition + " " + road_surface_condition + " " + validity_of_license + " " + vehicle_pre_crashfactors + " " + alchohol + " " + ds_division + " " + Work_day_holiday + " " + driver_age + " " + gender + " " + x))
-         return redirect(url_for('success', name =  (x * 100)))
+         try :
+            model = Model()
+            # x = model.dayOfweek()
+            x = model.mysqlResult(day_of_week, weather, light_condition, road_surface_condition, validity_of_license, vehicle_pre_crashfactors, alchohol, ds_division, Work_day_holiday, driver_age, gender)
+            # return redirect(url_for('success', name = day_of_week + " " + weather + light_condition + " " + road_surface_condition + " " + validity_of_license + " " + vehicle_pre_crashfactors + " " + alchohol + " " + ds_division + " " + Work_day_holiday + " " + driver_age + " " + gender + " " + x))
+            return redirect(url_for('success', name =  (x * 100), percentage = "%"))
+         except ValueError:
+            return redirect(url_for('success', name=("No Values Meet Process ") , percentage = "..."))
 
 
-@app.route('/success/<name>')
-def success(name):
-   return render_template('index.html', name = name)
+@app.route('/success/<name> <percentage>')
+def success(name,percentage):
+   return render_template('index.html', name = name, percentage = percentage)
    # return 'Welcome %s' % name
 
 if __name__ == '__main__':
