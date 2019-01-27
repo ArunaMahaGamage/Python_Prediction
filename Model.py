@@ -23,6 +23,7 @@ class Model :
           return (decision.score(testX, testY))
 
     def mysqlResult(self, day_of_week, weather, light_condition, road_surface_condition, validity_of_license, vehicle_pre_crashfactors, alchohol, ds_division, Work_day_holiday, driver_age, gender):
+        day_of_weeks = {"Sunday": "Sachine Tendulkar", "Monday": "Dravid", "Tuesday": "Sehwag", "Wednesday": "Laxman", "Thursday": "Kohli" , "Friday": "Kohli" , "Saturday": "Kohli"}
         # Setup MySQL connection
         db = mysql.connector.connect(
             host="localhost",  # your host, usually localhost
@@ -35,7 +36,7 @@ class Model :
         cur = db.cursor()
 
         # Use all the SQL you like
-        cur.execute("SELECT * FROM accident WHERE DSDivision = 6")
+        cur.execute("SELECT * FROM accident WHERE DSDivision = 7")
 
         # Put it all to a data frame
         df = pd.DataFrame(cur.fetchall())
@@ -52,5 +53,6 @@ class Model :
         trainX, testX, trainY, testY = train_test_split(X, Y, test_size=0.5)
         decision = decision.fit(trainX, trainY)
         decision.predict([[1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]])
-        return (decision.score(testX, testY))
+        return (day_of_weeks["Sunday"])
+        # return (decision.score(testX, testY))
 
