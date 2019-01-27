@@ -51,7 +51,7 @@ class Model :
 
         # Use all the SQL you like
         # cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + "AND Weather = 1")
-        cur.execute("SELECT * FROM accidents.accident WHERE DSDivision = 6 and Weather = 2")
+        cur.execute("SELECT * FROM accidents.accident WHERE DSDivision = 5 and Weather = 2 and LightCondition = 2 and RoadSurface = 1")
 
         # Put it all to a data frame
         df = pd.DataFrame(cur.fetchall())
