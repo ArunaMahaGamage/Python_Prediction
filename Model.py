@@ -34,10 +34,6 @@ class Model :
         Work_day_holidays = {"Work Day": "1", "Holiday": "2"}
         Driver_gender_= {"Male": "1", "Female": "2"}
 
-
-
-
-
         # Setup MySQL connection
         db = mysql.connector.connect(
             host="localhost",  # your host, usually localhost
@@ -50,7 +46,7 @@ class Model :
         cur = db.cursor()
 
         # Use all the SQL you like
-        cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + " and Weather =" + "2")
+        cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + " and Weather =" + weathers[weather])
         # cur.execute("SELECT * FROM accidents.accident WHERE DSDivision = 5 and Weather = 2 and LightCondition = 2 and RoadSurface = 1")
 
         # Put it all to a data frame
@@ -68,6 +64,6 @@ class Model :
         trainX, testX, trainY, testY = train_test_split(X, Y, test_size=0.5)
         decision = decision.fit(trainX, trainY)
         decision.predict([[1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]])
-        # return (day_of_weeks[day_of_week])
+        # return (weathers[weather])
         return (decision.score(testX, testY))
 
