@@ -62,6 +62,10 @@ def result():
          x = model.dayOfweek()
          return redirect(url_for('success', name = x))
 
+      if weather is not "Select":
+         model = Model()
+         x = model.dayOfweek()
+         return redirect(url_for('success', name=x))
 
 @app.route('/success/<name>')
 def success(name):
