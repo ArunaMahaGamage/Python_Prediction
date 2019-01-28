@@ -27,12 +27,12 @@ class Model :
         weathers = {"Clear": "1", "Cloudy": "2", "Rainy": "3", "Fogg/Mist": "4", "Other": "9" , "Not Known": "0"}
         light_conditions = {"DayLight": "1", "Night, No Street lamps": "2", "Dusk,Dawn": "3", "Night, Improper street lightning": "4", "Night, Good street lighting": "5" , "Not Known": "0"}
         road_surface_= {"Dry": "1", "Wet": "2", "Flooded with water": "3", "Slippery Surface": "4", "Other": "9" , "Not Known": "0"}
-        validity_license_= {"International license": "5", "Probation license": "4", "Learner Permit": "3", "No valid license for vehicle": "2", "Valied license": "1" , "Not Known": "0"}
-        vehicle_pre_crashfactor= {"Other,Not Known": "9", "Over loaded or wrongly loaded vehicle": "6", "Poor mechanical condition": "5", "Lights, Lamps": "4" , "Steering": "3", "Tyres": "2", "Brakes": "1"}
+        validity_license = {"International license": "5", "Probation license": "4", "Learner Permit": "3", "No valid license for vehicle": "2", "Valied license": "1" , "Not Known": "0"}
+        vehicle_pre_crashfactor= {"Other":"0","Not Known": "9", "Over loaded or wrongly loaded vehicle": "6", "Poor mechanical condition": "5", "Lights, Lamps": "4" , "Steering": "3", "Tyres": "2", "Brakes": "1"}
         alchohol_test_= {"Not tested": "3", "Over leagal limit": "2", "No Alchohol": "1"}
         ds_divisions_= {"Ampara": "1", "Anuradhapura": "2", "Badulla": "3", "Slippery Surface": "4", "Other": "9", "Not Known": "0",  "Not Known": "0"}
         Work_day_holidays = {"Work Day": "1", "Holiday": "2"}
-        Driver_gender_= {"Male": "1", "Female": "2"}
+        Driver_gender= {"Male": "1", "Female": "2"}
 
         # Setup MySQL connection
         db = mysql.connector.connect(
@@ -46,7 +46,8 @@ class Model :
         cur = db.cursor()
 
         # Use all the SQL you like
-        cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + " and Weather =" + weathers[weather] + " and LightCondition = " + light_conditions[light_condition] + " and RoadSurface = " + road_surface_[road_surface_condition])
+        # cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + " and Weather =" + weathers[weather] + " and LightCondition = " + light_conditions[light_condition] + " and RoadSurface = " + road_surface_[road_surface_condition] + " and ValidityofLicence = " + validity_license[validity_of_license] + " and VehiclePreCrashFactor = " + vehicle_pre_crashfactor[vehicle_pre_crashfactors])
+        cur.execute("SELECT * FROM accident WHERE DayofWeek = " + day_of_weeks[day_of_week] + " and Weather =" + weathers[weather] + " and LightCondition = " + light_conditions[light_condition] + " and RoadSurface = " + road_surface_[road_surface_condition] + " and ValidityofLicence = " + validity_license[validity_of_license] +  " and DriverGender = " + Driver_gender[gender])
         # cur.execute("SELECT * FROM accidents.accident WHERE DSDivision = 5 and Weather = 2 and LightCondition = 2 and RoadSurface = 1")
 
         # Put it all to a data frame
