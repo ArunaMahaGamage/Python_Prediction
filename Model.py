@@ -38,7 +38,7 @@ class Model :
         db = mysql.connector.connect(
             host="localhost",  # your host, usually localhost
             user="root",  # your username
-            password="R1327526",  # your password
+            password="",  # your password
             database="accidents"  # name of the data base
         )
 
